@@ -25,21 +25,21 @@ if lsa != 2:
     sys.exit(1)
 
 try:
-	if ":" in sa[1]:
-		local_time = (strftime("%H:%M", localtime()))
-		split_local_time = local_time.partition(":")
-		split_sa_time = sa[1].partition(":")
-		# delta in minutes
-		delta_h = int(split_sa_time[0]) * 60 - int(split_local_time[0]) * 60
-		delta_m = int(split_sa_time[2]) - int(split_local_time[2])
-		minutes = delta_h + delta_m
-		if minutes < 0:
-			delta_h = (23 - int(split_local_time[0])) * 60 + int(split_sa_time[0]) * 60
-			delta_m = 60 - int(split_local_time[2]) + int(split_sa_time[2])
-			minutes = int(delta_h) + int(delta_m)
-			
-	if ":" not in sa[1]:
-		minutes = int(sa[1])
+    if ":" in sa[1]:
+        local_time = (strftime("%H:%M", localtime()))
+        split_local_time = local_time.partition(":")
+        split_sa_time = sa[1].partition(":")
+        # delta in minutes
+        delta_h = int(split_sa_time[0]) * 60 - int(split_local_time[0]) * 60
+        delta_m = int(split_sa_time[2]) - int(split_local_time[2])
+        minutes = delta_h + delta_m
+        if minutes < 0:
+            delta_h = (23 - int(split_local_time[0])) * 60 + int(split_sa_time[0]) * 60
+            delta_m = 60 - int(split_local_time[2]) + int(split_sa_time[2])
+            minutes = int(delta_h) + int(delta_m)
+
+    if ":" not in sa[1]:
+        minutes = int(sa[1])
 except ValueError:
     print("Invalid numeric value (%s) for minutes" % sa[1])
     print("Should be an integer >= 0")
